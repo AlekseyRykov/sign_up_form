@@ -64,3 +64,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'client_side_validations'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'

@@ -16,3 +16,32 @@
 //= require turbolinks
 //= require rails.validations
 //= require_tree .
+//= require jquery-ui
+
+// window.ClientSideValidations.callbacks.element.fail = function(element, message, callback) {
+//     callback();
+//     if (element.data('valid') !== false) {
+//         element.parent().find('.message').hide().effect('highlight', {}, 2000);
+//         element.animate( { backgroundColor: "#ffffcc" }, 1000);
+//     }
+// }
+//
+
+var failures = 0
+
+window.ClientSideValidations.callbacks.element.fail = function(element, message, callback) {
+    callback();
+    failures = failures * 1 + 1;
+    if (element.data('valid') !== false) {
+        element.parent().addClass('fas fa-exclamation');
+        $('#submit').attr('disabled', 'disabled');
+    }
+}
+
+window.ClientSideValidations.callbacks.element.pass = function(element, callback) {
+    failures = failures * 1 - 1;
+    element.parent().removeClass('fas fa-exclamation').addClass('fas fa-check');
+    if (failures === 0) {
+        $('#submit').removeAttr('disabled');
+    }
+}
