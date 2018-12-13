@@ -4,27 +4,27 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :username %>
+    <%= f.label :username, 'Username:' %>
     <%= f.text_field :username %>
   </div>
 
   <div class="field">
-    <%= f.label :firstname %>
+    <%= f.label :firstname, 'Firstname:' %>
     <%= f.text_field :firstname %>
   </div>
 
   <div class="field">
-    <%= f.label :lastname%>
+    <%= f.label :lastname, 'Lastname:' %>
     <%= f.text_field :lastname %>
   </div>
 
   <div class="field">
-    <%= f.label :email %>
+    <%= f.label :email, 'Email:' %>
     <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, 'Paassword:' %>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 

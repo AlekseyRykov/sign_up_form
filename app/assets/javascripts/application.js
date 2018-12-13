@@ -25,20 +25,18 @@ window.ClientSideValidations.callbacks.form.fail = function() {
 };
 
 window.ClientSideValidations.callbacks.element.fail = function(element, message, callback) {
+    if (element.parent().hasClass('fas fa-check')) element.unwrap();
     callback();
     errors = errors + 1;
     if (element.data('valid') !== false) {
-        element.parent().find('.message').hide().effect('highlight', {}, 2000);
-        element.animate( { backgroundColor: "#ffffcc" }, 1000);
         element.parent().addClass('fas fa-exclamation');
         $('#submit').attr('disabled', 'disabled');
     }
 };
 
 window.ClientSideValidations.callbacks.element.pass = function(element, callback) {
+    callback();
     if (errors > 0) errors = errors - 1;
-    element.parent().removeClass('fas fa-exclamation').addClass('fas fa-check');
-    element.parent().find('.message').effect('fade', {}, 2000, callback);
-    element.animate( { backgroundColor: "#ffffff" }, 1000, callback);
+    element.wrap( "<div class='fas fa-check'></div>" );
     if (errors === 0) $('#submit').removeAttr('disabled');
 };
