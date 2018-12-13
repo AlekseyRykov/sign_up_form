@@ -18,30 +18,27 @@
 //= require_tree .
 //= require jquery-ui
 
-// window.ClientSideValidations.callbacks.element.fail = function(element, message, callback) {
-//     callback();
-//     if (element.data('valid') !== false) {
-//         element.parent().find('.message').hide().effect('highlight', {}, 2000);
-//         element.animate( { backgroundColor: "#ffffcc" }, 1000);
-//     }
-// }
-//
+var errors = 0;
 
-var failures = 0
+window.ClientSideValidations.callbacks.form.fail = function() {
+    $('#submit').attr('disabled', 'disabled');
+};
 
 window.ClientSideValidations.callbacks.element.fail = function(element, message, callback) {
     callback();
-    failures = failures * 1 + 1;
+    errors = errors + 1;
     if (element.data('valid') !== false) {
+        element.parent().find('.message').hide().effect('highlight', {}, 2000);
+        element.animate( { backgroundColor: "#ffffcc" }, 1000);
         element.parent().addClass('fas fa-exclamation');
         $('#submit').attr('disabled', 'disabled');
     }
-}
+};
 
 window.ClientSideValidations.callbacks.element.pass = function(element, callback) {
-    failures = failures * 1 - 1;
+    if (errors > 0) errors = errors - 1;
     element.parent().removeClass('fas fa-exclamation').addClass('fas fa-check');
-    if (failures === 0) {
-        $('#submit').removeAttr('disabled');
-    }
-}
+    element.parent().find('.message').effect('fade', {}, 2000, callback);
+    element.animate( { backgroundColor: "#ffffff" }, 1000, callback);
+    if (errors === 0) $('#submit').removeAttr('disabled');
+};
