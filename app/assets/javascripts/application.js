@@ -37,6 +37,24 @@ window.ClientSideValidations.callbacks.element.fail = function(element, message,
 window.ClientSideValidations.callbacks.element.pass = function(element, callback) {
     callback();
     if (errors > 0) errors = errors - 1;
-    element.wrap( "<div class='fas fa-check'></div>" );
+    if (! element.parent().hasClass('fas fa-check')) element.wrap( "<div class='fas fa-check'></div>" );
     if (errors === 0) $('#submit').removeAttr('disabled');
+};
+
+window.ClientSideValidations.validators.remote['username'] = function(element, options) {
+    if ($.ajax({
+        url: '/validators/username',
+        data: { username: element.val() },
+        // async *must* be false
+        async: false
+    }).status === 200) { console.log(options); return options.message; }
+};
+
+window.ClientSideValidations.validators.remote['email'] = function(element, options) {
+    if ($.ajax({
+        url: '/validators/email',
+        data: { email: element.val() },
+        // async *must* be false
+        async: false
+    }).status === 200) { console.log(options); return options.message; }
 };
