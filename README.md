@@ -1,24 +1,17 @@
-# README
+# Sign up form
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Git clone
+```
+git clone git@github.com:AlekseyRykov/sign_up_form.git
+```
+Install all dependencies
+```
+bundle install
+```
+Run migration
+```
+rake db:migrate
+```
+Start rails in development env:
+```
+bundle exec rails s
