@@ -8,6 +8,10 @@ Install all dependencies
 ```
 bundle install
 ```
+Create DB
+```
+rake db:create
+```
 Run migration
 ```
 rake db:migrate
